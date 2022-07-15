@@ -152,7 +152,7 @@ INSERT INTO `savoir` (`id_savoir`, `theme`, `definition`, `id_metier`) VALUES
 CREATE TABLE `session` (
   `id_session` int(11) NOT NULL,
   `id_metier` int(11) NOT NULL,
-  `label` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
+  `nom` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `id_centre` int(11) NOT NULL,
   `date_start` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
