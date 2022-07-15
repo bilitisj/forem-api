@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# ------------- Route Users -------------
+RewriteRule user/([0-9]+)$ user.php?id_user=$1 [L]
+RewriteRule user$ user.php [L]
+
+# ------------- Route Session -------------
+RewriteRule session/([0-9]+)$ session.php?id_session=$1 [L]
+RewriteRule session$ session.php [L]
