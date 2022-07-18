@@ -27,9 +27,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') :
     $json = file_get_contents('php://input');
     //décodage du format json, ça génère un obect php
     $objectPOST = json_decode($json);
-    $sql = sprintf("INSERT INTO `session` SET id_metier=%d, `nom`='%s', id_centre=%d, date_start='%s'",
+    $sql = sprintf("INSERT INTO `session` SET id_metier=%d, `label`='%s', id_centre=%d, date_start='%s'",
         strip_tags(addslashes($objectPOST->id_metier)),//lire une propriété d'un objet PHP
-        strip_tags(addslashes($objectPOST->nom)),
+        strip_tags(addslashes($objectPOST->label)),
         strip_tags(addslashes($objectPOST->id_centre)),
         strip_tags(addslashes($objectPOST->date_start)),
 );

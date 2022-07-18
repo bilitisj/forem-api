@@ -87,7 +87,7 @@ CREATE TABLE `evaluations` (
 --
 
 CREATE TABLE `inscriptions` (
-  `id_planification` int(11) NOT NULL,
+  `id_session` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -113,11 +113,11 @@ INSERT INTO `metiers` (`id_metiers`, `label`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `planification`
+-- Structure de la table `sessions`
 --
 
-CREATE TABLE `planification` (
-  `id_planification` int(11) NOT NULL,
+CREATE TABLE `sessions` (
+  `id_session` int(11) NOT NULL,
   `id_metier` int(11) NOT NULL,
   `label` varchar(200) NOT NULL,
   `id_centre` int(11) NOT NULL,
@@ -125,10 +125,10 @@ CREATE TABLE `planification` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `planification`
+-- Déchargement des données de la table `session`
 --
 
-INSERT INTO `planification` (`id_planification`, `id_metier`, `label`, `id_centre`, `date_start`) VALUES
+INSERT INTO `session` (`id_session`, `id_metier`, `label`, `id_centre`, `date_start`) VALUES
 (1, 1, 'Web Front 11', 1, '2023-06-11'),
 (2, 0, 'Dot Net 12', 2, NULL);
 
@@ -204,7 +204,7 @@ ALTER TABLE `evaluations`
 -- Index pour la table `inscriptions`
 --
 ALTER TABLE `inscriptions`
-  ADD PRIMARY KEY (`id_planification`,`id_user`);
+  ADD PRIMARY KEY (`id_session`,`id_user`);
 
 --
 -- Index pour la table `metiers`
@@ -213,10 +213,10 @@ ALTER TABLE `metiers`
   ADD PRIMARY KEY (`id_metiers`);
 
 --
--- Index pour la table `planification`
+-- Index pour la table `session`
 --
-ALTER TABLE `planification`
-  ADD PRIMARY KEY (`id_planification`);
+ALTER TABLE `session`
+  ADD PRIMARY KEY (`id_session`);
 
 --
 -- Index pour la table `savoirs`
@@ -259,10 +259,10 @@ ALTER TABLE `metiers`
   MODIFY `id_metiers` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pour la table `planification`
+-- AUTO_INCREMENT pour la table `session`
 --
-ALTER TABLE `planification`
-  MODIFY `id_planification` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `session`
+  MODIFY `id_session` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `savoirs`
