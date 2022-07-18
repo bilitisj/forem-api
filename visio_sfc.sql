@@ -140,7 +140,7 @@ INSERT INTO `session` (`id_session`, `id_metier`, `label`, `id_centre`, `date_st
 
 CREATE TABLE `savoirs` (
   `id_savoirs` int(10) UNSIGNED NOT NULL,
-  `id_metier` int(11) NOT NULL,
+  `id_metiers` int(11) NOT NULL,
   `definition` text NOT NULL,
   `theme` enum('organisation','analyse','curiosite','autonomie','critique','motivation') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -149,7 +149,7 @@ CREATE TABLE `savoirs` (
 -- Déchargement des données de la table `savoirs`
 --
 
-INSERT INTO `savoirs` (`id_savoirs`, `id_metier`, `definition`, `theme`) VALUES
+INSERT INTO `savoirs` (`id_savoirs`, `id_metiers`, `definition`, `theme`) VALUES
 (1, 1, 'J\'analyse les problèmes pour y trouver des solutions\r\nCapacité de réfléchir et de faire montre de logique et de jugement face à des décisions, d\'évaluer des problèmes ou des situations en faisant les recherches nécessaires et en analysant les différentes composantes', 'analyse'),
 (2, 1, 'Je suis curieux intellectuellement pour ce qui touche à mon métier\r\nCapacité d\'ouvrir son champ de connaissance, d\'avoir l\'esprit ouvert, d\'acquérir continuellement de nouvelles connaissances et d\'apprendre de ses expériences antérieures', 'curiosite');
 

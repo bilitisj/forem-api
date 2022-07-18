@@ -1,9 +1,25 @@
 RewriteEngine On
 
 # ------------- Route Users -------------
-RewriteRule user/([0-9]+)$ user.php?id_user=$1 [L]
-RewriteRule user$ user.php [L]
+RewriteRule users/([0-9]+)$ users.php?id_users=$1 [L]
+RewriteRule users$ users.php [L]
 
 # ------------- Route Session -------------
 RewriteRule session/([0-9]+)$ session.php?id_session=$1 [L]
 RewriteRule session$ session.php [L]
+
+# ------------- Route Métiers -------------
+RewriteRule metiers/([0-9]+)$ metiers.php?id_metiers=$1 [L]
+RewriteRule metiers$ metiers.php [L]
+
+# ------------- Route Centres -------------
+RewriteRule centres/([0-9]+)$ centres.php?id_centres=$1 [L]
+RewriteRule centres$ centres.php [L]
+
+# ------------- Route Comportements -------------
+RewriteRule comportements/([0-9]+)$ comportements.php?id_comportements=$1 [L]
+RewriteRule comportements$ comportements.php [L]
+
+# ------------- Route savoirs -------------
+RewriteRule savoirs/([0-9]+)$ savoirs.php?id_savoirs=$1 [L]
+RewriteRule savoirs$ savoirs.php [L]

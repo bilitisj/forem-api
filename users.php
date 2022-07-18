@@ -4,14 +4,14 @@ include 'headers.php';
 
  // ------------------- Method GET ----------------------
 if($_SERVER['REQUEST_METHOD'] == 'GET') :
-    if( isset($_GET['id_session'])) : 
-        $sql = sprintf("SELECT * FROM `session` WHERE id_session = %d",
-            $_GET['id_session']
+    if( isset($_GET['id_users'])) : 
+        $sql = sprintf("SELECT * FROM `users` WHERE id_users = %d",
+            $_GET['id_users']
         );
-        $response['response'] = "Une session " .$_GET['id_session'];
+        $response['response'] = "Un utilisateur avec l'id " .$_GET['id_users'];
     else :
-        $sql = "SELECT * FROM `session` ";
-        $response['response'] = "Toutes les sessions";
+        $sql = "SELECT * FROM `users` ";
+        $response['response'] = "Tous les utilisateurs";
 
     endif;
     $result = $connect->query($sql);
@@ -27,16 +27,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') :
     $json = file_get_contents('php://input');
     //décodage du format json, ça génère un obect php
     $objectPOST = json_decode($json);
-    $sql = sprintf("INSERT INTO `session` SET id_metier=%d, `label`='%s', id_centre=%d, date_start='%s'",
-        strip_tags(addslashes($objectPOST->id_metier)),//lire une propriété d'un objet PHP
-        strip_tags(addslashes($objectPOST->label)),
-        strip_tags(addslashes($objectPOST->id_centre)),
-        strip_tags(addslashes($objectPOST->date_start))
+    $sql = sprintf("INSERT INTO `users` SET `email`='%s', `password`='%s', lastname='%s', firstname='%s', `level`='%s'",
+        strip_tags(addslashes($objectPOST->email)),
+        strip_tags(addslashes($objectPOST->password)),
+        strip_tags(addslashes($objectPOST->lastname)),
+        strip_tags(addslashes($objectPOST->firstname)),
+        strip_tags(addslashes($objectPOST->level))
 );
     $response['sql'] = $sql;
     $connect->query($sql);
     echo $connect->error;
-    $response['response'] = "Ajout d'une session avec l'id ";
+    $response['response'] = "Ajout d'un utilisateur avec l'id ";
     $response['new_id'] = $connect->insert_id;
 endif; //END POST
 
