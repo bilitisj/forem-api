@@ -4,9 +4,9 @@ include 'headers.php';
 
  // ------------------- Method GET ----------------------
 if($_SERVER['REQUEST_METHOD'] == 'GET') :
-    // - - -- - - - -  type de users  - - -- - - - -
+    // - - -- - - - -  type de user  - - -- - - - -
     if( isset($_GET['search']) AND isset($_GET['type'])) : 
-        $sql = sprintf("SELECT * FROM `users` WHERE(lastname LIKE '%s%%' OR firstname LIKE '%s%%') AND level = '%s'",
+        $sql = sprintf("SELECT * FROM `user` WHERE(lastname LIKE '%s%%' OR firstname LIKE '%s%%') AND level = '%s'",
             $_GET['search'],
             $_GET['search'],
             $_GET['type']
@@ -22,14 +22,14 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') :
         endif;
     else :
 
-     // - - -- - - - -  Tous les users  - - -- - - - -
-    if( isset($_GET['id_users'])) : 
-        $sql = sprintf("SELECT * FROM `users` WHERE id_users = %d",
-            $_GET['id_users']
+     // - - -- - - - -  Tous les user  - - -- - - - -
+    if( isset($_GET['id_user'])) : 
+        $sql = sprintf("SELECT * FROM `user` WHERE id_user = %d",
+            $_GET['id_user']
         );
-        $response['response'] = "Un utilisateur avec l'id " .$_GET['id_users'];
+        $response['response'] = "Un utilisateur avec l'id " .$_GET['id_user'];
     else :
-        $sql = "SELECT * FROM `users` ";
+        $sql = "SELECT * FROM `user` ";
         $response['response'] = "Tous les utilisateurs";
 
     endif;
@@ -47,7 +47,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') :
     $json = file_get_contents('php://input');
     //décodage du format json, ça génère un obect php
     $objectPOST = json_decode($json);
-    $sql = sprintf("INSERT INTO `users` SET `email`='%s', `password`='%s', lastname='%s', firstname='%s', `level`='%s'",
+    $sql = sprintf("INSERT INTO `user` SET `email`='%s', `password`='%s', lastname='%s', firstname='%s', `level`='%s'",
         strip_tags(addslashes($objectPOST->email)),
         strip_tags(addslashes($objectPOST->password)),
         strip_tags(addslashes($objectPOST->lastname)),

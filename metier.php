@@ -2,17 +2,16 @@
 include 'config.php';
 include 'headers.php';
 
-
  // ------------------- Method GET ----------------------
 if($_SERVER['REQUEST_METHOD'] == 'GET') :
-    if( isset($_GET['id_savoirs'])) : 
-        $sql = sprintf("SELECT * FROM `savoirs` WHERE id_savoirs = %d",
-            $_GET['id_savoirs']
+    if( isset($_GET['id_metier'])) : 
+        $sql = sprintf("SELECT * FROM `metier` WHERE id_metier = %d",
+            $_GET['id_metier']
         );
-        $response['response'] = "Un savoir " .$_GET['id_savoirs'];
+        $response['response'] = "Un metier " .$_GET['id_metier'];
     else :
-        $sql = "SELECT * FROM `savoirs` ";
-        $response['response'] = "Tous les savoirs";
+        $sql = "SELECT * FROM `metier` ";
+        $response['response'] = "Tous les metiers";
 
     endif;
     $result = $connect->query($sql);
@@ -28,15 +27,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') :
     $json = file_get_contents('php://input');
     //décodage du format json, ça génère un obect php
     $objectPOST = json_decode($json);
-    $sql = sprintf("INSERT INTO `savoirs` SET `id_metiers`=%d, `definition`='%s', `theme`='%s'",
-        strip_tags(addslashes($objectPOST->id_metiers)),
-        strip_tags(addslashes($objectPOST->definition)),
-        strip_tags(addslashes($objectPOST->theme))
+    $sql = sprintf("INSERT INTO `metier` SET `label`='%s'",
+        strip_tags(addslashes($objectPOST->label))
 );
     $response['sql'] = $sql;
     $connect->query($sql);
     echo $connect->error;
-    $response['response'] = "Ajout d'un savoir avec l'id ";
+    $response['response'] = "Ajout d'un métier avec l'id ";
     $response['new_id'] = $connect->insert_id;
 endif; //END POST
 

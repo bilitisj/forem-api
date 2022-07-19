@@ -4,14 +4,14 @@ include 'headers.php';
 
  // ------------------- Method GET ----------------------
 if($_SERVER['REQUEST_METHOD'] == 'GET') :
-    if( isset($_GET['id_centres'])) : 
-        $sql = sprintf("SELECT * FROM `centres` WHERE id_centres = %d",
-            $_GET['id_centres']
+    if( isset($_GET['id_inscription'])) : 
+        $sql = sprintf("SELECT * FROM `inscription` WHERE id_inscription = %d",
+            $_GET['id_inscription']
         );
-        $response['response'] = "Un centre avec l'id " .$_GET['id_centres'];
+        $response['response'] = "Une inscription " .$_GET['id_inscription'];
     else :
-        $sql = "SELECT * FROM `centres` ";
-        $response['response'] = "Tous les centres";
+        $sql = "SELECT * FROM `inscription` ";
+        $response['response'] = "Toutes les inscriptions";
 
     endif;
     $result = $connect->query($sql);
@@ -27,13 +27,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') :
     $json = file_get_contents('php://input');
     //décodage du format json, ça génère un obect php
     $objectPOST = json_decode($json);
-    $sql = sprintf("INSERT INTO `centres` SET `name`='%s'",
-        strip_tags(addslashes($objectPOST->name))
+    $sql = sprintf("INSERT INTO `inscription` SET id_session=%d, id_user=%d ",
+        strip_tags(addslashes($objectPOST->id_session)),
+        strip_tags(addslashes($objectPOST->id_user))
 );
     $response['sql'] = $sql;
     $connect->query($sql);
     echo $connect->error;
-    $response['response'] = "Ajout d'un centre avec l'id ";
+    $response['response'] = "Ajout d'une inscription avec l'id ";
     $response['new_id'] = $connect->insert_id;
 endif; //END POST
 

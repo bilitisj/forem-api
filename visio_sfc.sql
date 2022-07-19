@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : mar. 19 juil. 2022 à 09:45
+-- Généré le : mar. 19 juil. 2022 à 15:00
 -- Version du serveur :  5.7.34
 -- Version de PHP : 8.0.8
 
@@ -24,19 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `centres`
+-- Structure de la table `centre`
 --
 
-CREATE TABLE `centres` (
-  `id_centres` int(10) UNSIGNED NOT NULL,
+CREATE TABLE `centre` (
+  `id_centre` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `centres`
+-- Déchargement des données de la table `centre`
 --
 
-INSERT INTO `centres` (`id_centres`, `name`) VALUES
+INSERT INTO `centre` (`id_centre`, `name`) VALUES
 (1, 'Cepegra'),
 (2, 'Technobel'),
 (3, 'Corail');
@@ -44,21 +44,21 @@ INSERT INTO `centres` (`id_centres`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `comportements`
+-- Structure de la table `comportement`
 --
 
-CREATE TABLE `comportements` (
-  `id_comportements` int(10) UNSIGNED NOT NULL,
+CREATE TABLE `comportement` (
+  `id_comportement` int(10) UNSIGNED NOT NULL,
   `label` text NOT NULL,
   `id_savoir` int(11) NOT NULL,
   `niveau` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `comportements`
+-- Déchargement des données de la table `comportement`
 --
 
-INSERT INTO `comportements` (`id_comportements`, `label`, `id_savoir`, `niveau`) VALUES
+INSERT INTO `comportement` (`id_comportement`, `label`, `id_savoir`, `niveau`) VALUES
 (1, 'Je me fie à mon instinct et je commence à travailler sans réflexion', 1, 1),
 (2, 'Je consulte le web à la recherche d\'une solution toute faite. Je fais appel à quelqu\'un pour m\'aider.', 1, 2),
 (3, 'Je décompose un problème en sous-éléments en utilisant un schéma. Je consulte différentes ressources & documentations pour parvenir à une solution.', 1, 3),
@@ -67,11 +67,11 @@ INSERT INTO `comportements` (`id_comportements`, `label`, `id_savoir`, `niveau`)
 -- --------------------------------------------------------
 
 --
--- Structure de la table `evaluations`
+-- Structure de la table `evaluation`
 --
 
-CREATE TABLE `evaluations` (
-  `id_evaluations` int(10) UNSIGNED NOT NULL,
+CREATE TABLE `evaluation` (
+  `id_evaluation` int(10) UNSIGNED NOT NULL,
   `date` date NOT NULL,
   `id_inscription` int(11) NOT NULL,
   `number` int(11) NOT NULL,
@@ -86,31 +86,31 @@ CREATE TABLE `evaluations` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `inscriptions`
+-- Structure de la table `inscription`
 --
 
-CREATE TABLE `inscriptions` (
-  `id_inscriptions` int(10) UNSIGNED NOT NULL,
+CREATE TABLE `inscription` (
+  `id_inscription` int(10) UNSIGNED NOT NULL,
   `id_session` int(11) NOT NULL,
-  `id_users` int(11) NOT NULL
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `metiers`
+-- Structure de la table `metier`
 --
 
-CREATE TABLE `metiers` (
-  `id_metiers` int(10) UNSIGNED NOT NULL,
+CREATE TABLE `metier` (
+  `id_metier` int(10) UNSIGNED NOT NULL,
   `label` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `metiers`
+-- Déchargement des données de la table `metier`
 --
 
-INSERT INTO `metiers` (`id_metiers`, `label`) VALUES
+INSERT INTO `metier` (`id_metier`, `label`) VALUES
 (1, 'WebDesigner Front-End'),
 (2, 'Infographie'),
 (3, 'Imprimeur');
@@ -118,21 +118,21 @@ INSERT INTO `metiers` (`id_metiers`, `label`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `savoirs`
+-- Structure de la table `savoir`
 --
 
-CREATE TABLE `savoirs` (
-  `id_savoirs` int(10) UNSIGNED NOT NULL,
-  `id_metiers` int(11) NOT NULL,
+CREATE TABLE `savoir` (
+  `id_savoir` int(10) UNSIGNED NOT NULL,
+  `id_metier` int(11) NOT NULL,
   `definition` text NOT NULL,
   `theme` enum('organisation','analyse','curiosite','autonomie','critique','motivation') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `savoirs`
+-- Déchargement des données de la table `savoir`
 --
 
-INSERT INTO `savoirs` (`id_savoirs`, `id_metiers`, `definition`, `theme`) VALUES
+INSERT INTO `savoir` (`id_savoir`, `id_metier`, `definition`, `theme`) VALUES
 (1, 1, 'J\'analyse les problèmes pour y trouver des solutions\r\nCapacité de réfléchir et de faire montre de logique et de jugement face à des décisions, d\'évaluer des problèmes ou des situations en faisant les recherches nécessaires et en analysant les différentes composantes', 'analyse'),
 (2, 1, 'Je suis curieux intellectuellement pour ce qui touche à mon métier\r\nCapacité d\'ouvrir son champ de connaissance, d\'avoir l\'esprit ouvert, d\'acquérir continuellement de nouvelles connaissances et d\'apprendre de ses expériences antérieures', 'curiosite'),
 (3, 1, 'Je mène ma barque: Capacité de se prendre en charge, selon ses responsabilités, de façon à poser des actions au moment opportun dans un contexte déterminé', 'autonomie');
@@ -148,7 +148,7 @@ CREATE TABLE `session` (
   `id_metier` int(11) NOT NULL,
   `label` varchar(200) NOT NULL,
   `id_centre` int(11) NOT NULL,
-  `id_users` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `date_start` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -156,7 +156,7 @@ CREATE TABLE `session` (
 -- Déchargement des données de la table `session`
 --
 
-INSERT INTO `session` (`id_session`, `id_metier`, `label`, `id_centre`, `id_users`, `date_start`) VALUES
+INSERT INTO `session` (`id_session`, `id_metier`, `label`, `id_centre`, `id_user`, `date_start`) VALUES
 (1, 1, 'Web Front 11', 1, 1, '2023-06-11'),
 (2, 0, 'Dot Net 12', 2, 1, NULL),
 (3, 2, 'Infographie', 2, 1, '2023-01-15');
@@ -164,11 +164,11 @@ INSERT INTO `session` (`id_session`, `id_metier`, `label`, `id_centre`, `id_user
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Structure de la table `user`
 --
 
-CREATE TABLE `users` (
-  `id_users` int(10) UNSIGNED NOT NULL,
+CREATE TABLE `user` (
+  `id_user` int(10) UNSIGNED NOT NULL,
   `email` varchar(200) NOT NULL,
   `password` varchar(50) NOT NULL,
   `lastname` varchar(100) NOT NULL,
@@ -177,55 +177,56 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `users`
+-- Déchargement des données de la table `user`
 --
 
-INSERT INTO `users` (`id_users`, `email`, `password`, `lastname`, `firstname`, `level`) VALUES
+INSERT INTO `user` (`id_user`, `email`, `password`, `lastname`, `firstname`, `level`) VALUES
 (1, 'pierre.charlier@forem.be', 'test', 'Charlier', 'Pierre', 'formateur'),
 (2, 'louis.michel@belga.be', 'test', 'Michel', 'Louis', 'stagiaire'),
 (3, 'francoise.devos@forem.be', 'test', 'Devos', 'Françoise', 'secrétaire'),
 (4, 'admin@cepegra.be', 'pass', 'Forem', 'Damien', 'admin'),
-(5, 'jambon_bilitis@hotmail.com', 'test', 'Jambon', 'Bilitis', 'stagiaire');
+(5, 'jambon_bilitis@hotmail.com', 'test', 'Jambon', 'Bilitis', 'stagiaire'),
+(6, 'o.belery@gmail.com', 'test', 'Belery', 'Olivier', 'formateur');
 
 --
 -- Index pour les tables déchargées
 --
 
 --
--- Index pour la table `centres`
+-- Index pour la table `centre`
 --
-ALTER TABLE `centres`
-  ADD PRIMARY KEY (`id_centres`);
+ALTER TABLE `centre`
+  ADD PRIMARY KEY (`id_centre`);
 
 --
--- Index pour la table `comportements`
+-- Index pour la table `comportement`
 --
-ALTER TABLE `comportements`
-  ADD PRIMARY KEY (`id_comportements`);
+ALTER TABLE `comportement`
+  ADD PRIMARY KEY (`id_comportement`);
 
 --
--- Index pour la table `evaluations`
+-- Index pour la table `evaluation`
 --
-ALTER TABLE `evaluations`
-  ADD PRIMARY KEY (`id_evaluations`);
+ALTER TABLE `evaluation`
+  ADD PRIMARY KEY (`id_evaluation`);
 
 --
--- Index pour la table `inscriptions`
+-- Index pour la table `inscription`
 --
-ALTER TABLE `inscriptions`
-  ADD PRIMARY KEY (`id_inscriptions`);
+ALTER TABLE `inscription`
+  ADD PRIMARY KEY (`id_inscription`);
 
 --
--- Index pour la table `metiers`
+-- Index pour la table `metier`
 --
-ALTER TABLE `metiers`
-  ADD PRIMARY KEY (`id_metiers`);
+ALTER TABLE `metier`
+  ADD PRIMARY KEY (`id_metier`);
 
 --
--- Index pour la table `savoirs`
+-- Index pour la table `savoir`
 --
-ALTER TABLE `savoirs`
-  ADD PRIMARY KEY (`id_savoirs`);
+ALTER TABLE `savoir`
+  ADD PRIMARY KEY (`id_savoir`);
 
 --
 -- Index pour la table `session`
@@ -234,50 +235,50 @@ ALTER TABLE `session`
   ADD PRIMARY KEY (`id_session`);
 
 --
--- Index pour la table `users`
+-- Index pour la table `user`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_users`);
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id_user`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT pour la table `centres`
+-- AUTO_INCREMENT pour la table `centre`
 --
-ALTER TABLE `centres`
-  MODIFY `id_centres` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `centre`
+  MODIFY `id_centre` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `comportements`
+-- AUTO_INCREMENT pour la table `comportement`
 --
-ALTER TABLE `comportements`
-  MODIFY `id_comportements` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `comportement`
+  MODIFY `id_comportement` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT pour la table `evaluations`
+-- AUTO_INCREMENT pour la table `evaluation`
 --
-ALTER TABLE `evaluations`
-  MODIFY `id_evaluations` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `evaluation`
+  MODIFY `id_evaluation` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `inscriptions`
+-- AUTO_INCREMENT pour la table `inscription`
 --
-ALTER TABLE `inscriptions`
-  MODIFY `id_inscriptions` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `inscription`
+  MODIFY `id_inscription` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `metiers`
+-- AUTO_INCREMENT pour la table `metier`
 --
-ALTER TABLE `metiers`
-  MODIFY `id_metiers` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `metier`
+  MODIFY `id_metier` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `savoirs`
+-- AUTO_INCREMENT pour la table `savoir`
 --
-ALTER TABLE `savoirs`
-  MODIFY `id_savoirs` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `savoir`
+  MODIFY `id_savoir` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `session`
@@ -286,10 +287,10 @@ ALTER TABLE `session`
   MODIFY `id_session` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT pour la table `user`
 --
-ALTER TABLE `users`
-  MODIFY `id_users` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `user`
+  MODIFY `id_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

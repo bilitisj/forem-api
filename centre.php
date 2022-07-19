@@ -4,14 +4,14 @@ include 'headers.php';
 
  // ------------------- Method GET ----------------------
 if($_SERVER['REQUEST_METHOD'] == 'GET') :
-    if( isset($_GET['id_comportements'])) : 
-        $sql = sprintf("SELECT * FROM `comportements` WHERE id_comportements = %d",
-            $_GET['id_comportements']
+    if( isset($_GET['id_centre'])) : 
+        $sql = sprintf("SELECT * FROM `centre` WHERE id_centre = %d",
+            $_GET['id_centre']
         );
-        $response['response'] = "Un comportement avec l'id " .$_GET['id_comportements'];
+        $response['response'] = "Un centre avec l'id " .$_GET['id_centre'];
     else :
-        $sql = "SELECT * FROM `comportements` ";
-        $response['response'] = "Tous les comportements";
+        $sql = "SELECT * FROM `centre` ";
+        $response['response'] = "Tous les centres";
 
     endif;
     $result = $connect->query($sql);
@@ -27,15 +27,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') :
     $json = file_get_contents('php://input');
     //décodage du format json, ça génère un obect php
     $objectPOST = json_decode($json);
-    $sql = sprintf("INSERT INTO `comportements` SET `label`='%s', `id_savoir`=%d, `niveau`=%d",
-        strip_tags(addslashes($objectPOST->label)),
-        strip_tags(addslashes($objectPOST->id_savoir)),
-        strip_tags(addslashes($objectPOST->niveau))
+    $sql = sprintf("INSERT INTO `centre` SET `name`='%s'",
+        strip_tags(addslashes($objectPOST->name))
 );
     $response['sql'] = $sql;
     $connect->query($sql);
     echo $connect->error;
-    $response['response'] = "Ajout d'un comportements";
+    $response['response'] = "Ajout d'un centre avec l'id ";
     $response['new_id'] = $connect->insert_id;
 endif; //END POST
 
