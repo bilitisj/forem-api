@@ -40,25 +40,25 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') :
 endif;
 endif; // END GET
 
-//  // ------------------- Method POST ----------------------
+ // ------------------- Method POST ----------------------
 
-// if($_SERVER['REQUEST_METHOD'] == 'POST') :
-//     //extraction de l'obect json du paquet HTTP
-//     $json = file_get_contents('php://input');
-//     //décodage du format json, ça génère un obect php
-//     $objectPOST = json_decode($json);
-//     $sql = sprintf("INSERT INTO `users` SET `email`='%s', `password`='%s', lastname='%s', firstname='%s', `level`='%s'",
-//         strip_tags(addslashes($objectPOST->email)),
-//         strip_tags(addslashes($objectPOST->password)),
-//         strip_tags(addslashes($objectPOST->lastname)),
-//         strip_tags(addslashes($objectPOST->firstname)),
-//         strip_tags(addslashes($objectPOST->level))
-// );
-//     $response['sql'] = $sql;
-//     $connect->query($sql);
-//     echo $connect->error;
-//     $response['response'] = "Ajout d'un utilisateur avec l'id ";
-//     $response['new_id'] = $connect->insert_id;
-// endif; //END POST
+if($_SERVER['REQUEST_METHOD'] == 'POST') :
+    //extraction de l'obect json du paquet HTTP
+    $json = file_get_contents('php://input');
+    //décodage du format json, ça génère un obect php
+    $objectPOST = json_decode($json);
+    $sql = sprintf("INSERT INTO `users` SET `email`='%s', `password`='%s', lastname='%s', firstname='%s', `level`='%s'",
+        strip_tags(addslashes($objectPOST->email)),
+        strip_tags(addslashes($objectPOST->password)),
+        strip_tags(addslashes($objectPOST->lastname)),
+        strip_tags(addslashes($objectPOST->firstname)),
+        strip_tags(addslashes($objectPOST->level))
+);
+    $response['sql'] = $sql;
+    $connect->query($sql);
+    echo $connect->error;
+    $response['response'] = "Ajout d'un utilisateur avec l'id ";
+    $response['new_id'] = $connect->insert_id;
+endif; //END POST
 
 echo Json_encode($response);
