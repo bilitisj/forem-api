@@ -23,3 +23,7 @@ RewriteRule comportements$ comportements.php [L]
 # ------------- Route savoirs -------------
 RewriteRule savoirs/([0-9]+)$ savoirs.php?id_savoirs=$1 [L]
 RewriteRule savoirs$ savoirs.php [L]
+
+# ------------- Route inscriptions -------------
+RewriteRule inscriptions/([0-9]+)$ inscriptions.php?id_inscriptions=$1 [L]
+RewriteRule inscriptions$ inscriptions.php [L]
