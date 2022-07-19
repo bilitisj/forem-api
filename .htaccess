@@ -2,7 +2,7 @@ RewriteEngine On
 
 # ------------- Route User -------------
 RewriteRule user/([0-9]+)$ user.php?id_user=$1 [L]
-RewriteRule user$ users.php [L]
+RewriteRule user$ user.php [L]
 
 # ------------- Route Session -------------
 RewriteRule session/([0-9]+)$ session.php?id_session=$1 [L]
@@ -10,7 +10,7 @@ RewriteRule session$ session.php [L]
 
 # ------------- Route Métier -------------
 RewriteRule metier/([0-9]+)$ metier.php?id_metier=$1 [L]
-RewriteRule metier$ metiers.php [L]
+RewriteRule metier$ metier.php [L]
 
 # ------------- Route Centre -------------
 RewriteRule centre/([0-9]+)$ centre.php?id_centre=$1 [L]
