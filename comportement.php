@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') :
         $response['response'] = "Un comportement avec l'id " .$_GET['id_comportement'];
     else :
         $sql = "SELECT * FROM `comportement` ";
-        $response['response'] = "Tous les comportements";
+        $response['response'] = "Tous les comportement";
 
     endif;
     $result = $connect->query($sql);

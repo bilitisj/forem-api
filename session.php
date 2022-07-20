@@ -9,10 +9,13 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') :
             $_GET['id_session']
         );
         $response['response'] = "Une session " .$_GET['id_session'];
+    elseif(isset($_GET['alldata'])):
+        $sql = 'SELECT * FROM `session` LEFT JOIN user ON user.id_user = session.id_user LEFT JOIN centre ON session.id_centre = centre.id_centre LEFT JOIN metier ON session.id_metier = metier.id_metier';
     else :
         $sql = "SELECT * FROM `session` ";
         $response['response'] = "Toutes les sessions";
-
+        
+        $response['sql'] = $sql;
     endif;
     $result = $connect->query($sql);
     echo $connect-> error;
@@ -27,9 +30,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') :
     $json = file_get_contents('php://input');
     //décodage du format json, ça génère un obect php
     $objectPOST = json_decode($json);
-    $sql = sprintf("INSERT INTO `session` SET id_metier=%d, `label`='%s', id_centre=%d, id_user=%d, date_start='%s'",
+    $sql = sprintf("INSERT INTO `session` SET id_metier=%d, `label_session`='%s', id_centre=%d, id_user=%d, date_start='%s'",
         strip_tags(addslashes($objectPOST->id_metier)),
-        strip_tags(addslashes($objectPOST->label)),
+        strip_tags(addslashes($objectPOST->label_session)),
         strip_tags(addslashes($objectPOST->id_centre)),
         strip_tags(addslashes($objectPOST->id_user)),
         strip_tags(addslashes($objectPOST->date_start))

@@ -146,7 +146,7 @@ INSERT INTO `savoir` (`id_savoir`, `id_metier`, `definition`, `theme`) VALUES
 CREATE TABLE `session` (
   `id_session` int(11) NOT NULL,
   `id_metier` int(11) NOT NULL,
-  `label` varchar(200) NOT NULL,
+  `label_session` varchar(200) NOT NULL,
   `id_centre` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `date_start` date DEFAULT NULL
@@ -156,9 +156,8 @@ CREATE TABLE `session` (
 -- Déchargement des données de la table `session`
 --
 
-INSERT INTO `session` (`id_session`, `id_metier`, `label`, `id_centre`, `id_user`, `date_start`) VALUES
-(1, 1, 'Web Front 11', 1, 1, '2023-06-11'),
-(2, 0, 'Dot Net 12', 2, 1, NULL),
+INSERT INTO `session` (`id_session`, `id_metier`, `label_session`, `id_centre`, `id_user`, `date_start`) VALUES
+(1, 1, 'ingrwf10', 1, 1, '2022-06-10'),
 (3, 2, 'Infographie', 2, 1, '2023-01-15');
 
 -- --------------------------------------------------------
